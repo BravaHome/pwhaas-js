@@ -4,7 +4,7 @@
   "description": "Hash passwords with the same powerful hardware used by attackers",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jdconley/pwhaas-js.git"
+    "url": "git+https://github.com/BravaHome/pwhaas-js.git"
   },
   "scripts": {
     "compile": "tslint --project tslint.json && tsc -d && tsc -p . && babel -d dist/src-babeled/ dist/src/ && babel -d dist/test-babeled/ dist/test/ && cp -rf dist/src-babeled/* dist/src/ && cp -rf dist/test-babeled/* dist/test/",
@@ -26,10 +26,10 @@
     "email": "jd.conley@gmail.com"
   },
   "bugs": {
-    "url": "https://github.com/jdconley/pwhaas-js/issues"
+    "url": "https://github.com/BravaHome/pwhaas-js/issues"
   },
   "engines": {
-    "node": "^4.0.0"
+    "node": "^12.0.0"
   },
   "files": [
     "dist/src"
