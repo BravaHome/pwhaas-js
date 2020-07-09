@@ -36,7 +36,10 @@ export const defaultClientOptions: () => ClientOptions = () => {
 let hashOptions: argon2.Options = {
     hashLength: 32,
     timeCost: 3,
-    memoryCost: 12,
+    // This used to just exponent(As in we pass 12 and it will do 2^12)
+    // now it need to be explicitly memory costs
+    // This is 4096 KB, the same as default one
+    memoryCost: 1 << 12,
     parallelism: 1,
     type: argon2.argon2i
 };
