@@ -224,7 +224,7 @@ export class Pwhaas implements PwhaasService {
         if (!this.options.disablePreHash) {
             salt = await this.generateSalt();
             saltElapsedHr = process.hrtime(startHrTime);
-            secretPlain = await argon2.hash(plain, salt, hashOptions);
+            secretPlain = await argon2.hash(plain, {...hashOptions, salt});
         }
 
         let hashResult: HashResponse;
@@ -295,7 +295,7 @@ export class Pwhaas implements PwhaasService {
         const localHash = LocalHash.from(hash);
         let secretPlain = plain;
         if (!localHash.preHashDisabled) {
-            secretPlain = await argon2.hash(plain, localHash.localSalt, hashOptions);
+            secretPlain = await argon2.hash(plain, {...hashOptions, salt: localHash.localSalt});
         }
 
         // Try to do the verify remotely. If fail, do it locally (bummer).
