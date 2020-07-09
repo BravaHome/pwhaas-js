@@ -32,7 +32,15 @@ exports.defaultClientOptions = () => {
 let hashOptions = {
     hashLength: 32,
     timeCost: 3,
-    memoryCost: 12,
+    // This used to just exponent(As in we pass 12 and it will do 2^12)
+    // now it need to be explicitly memory costs
+    // This is 4096 KB, the same as default one
+    // I would love to just do 1 << 12 like argon2 but we have this error of our linting
+    // src/index.ts[42, 17]: Forbidden bitwise operation
+    // npm ERR! code ELIFECYCLE
+    // npm ERR! errno 2
+    // npm ERR! pwhaas@1.2.0 compile: `tslint --project tslint.json && tsc -d && tsc -p . && babel -d dist/src-babeled/ dist/src/ && babel -d dist/tes
+    memoryCost: 4096,
     parallelism: 1,
     type: argon2.argon2i
 };
