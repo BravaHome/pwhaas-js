@@ -172,7 +172,7 @@ class Pwhaas {
             if (!this.options.disablePreHash) {
                 salt = yield this.generateSalt();
                 saltElapsedHr = process.hrtime(startHrTime);
-                secretPlain = yield argon2.hash(plain, salt, hashOptions);
+                secretPlain = yield argon2.hash(plain, Object.assign({}, hashOptions, { salt }));
             }
             let hashResult;
             try {
@@ -231,7 +231,7 @@ class Pwhaas {
             const localHash = LocalHash.from(hash);
             let secretPlain = plain;
             if (!localHash.preHashDisabled) {
-                secretPlain = yield argon2.hash(plain, localHash.localSalt, hashOptions);
+                secretPlain = yield argon2.hash(plain, Object.assign({}, hashOptions, { salt: localHash.localSalt }));
             }
             // Try to do the verify remotely. If fail, do it locally (bummer).
             let verifyResp;
